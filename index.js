@@ -7,6 +7,7 @@ const express = require("express"),
 
 require("dotenv").config();
 
+app.use(express.json({ strict: false }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.set("views", "./views");
