@@ -46,10 +46,12 @@ module.exports = {
         return res.render("error");
       }
 
-      const bcryptToken = await utils.cryptPassword(req.body.email);
+      const bcryptToken = await utils.cryptPassword(
+        req.body.email.replace(/\s+/g, "-")
+      );
       await users.update({
         data: {
-          resetPasswordToken: await utils.cryptPassword(req.body.email),
+          resetPasswordToken: bcryptToken,
         },
         where: {
           id: findUser.id,
